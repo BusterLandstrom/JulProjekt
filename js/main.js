@@ -7,8 +7,8 @@ canvas.setAttribute("class", "border");
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let startButtonHeight = 300;
-let startButtonWidth = 80;
+let startButtonWidth = 300;
+let startButtonHeight = 80;
 let startX = 360;
 let startY = 270;
 
@@ -38,8 +38,8 @@ function onClickEvent(e){
    var rect = canvas.getBoundingClientRect();
    var x = e.clientX - rect.left;
    var y = e.clientY - rect.top;
-   var endx = startX + startButtonHeight;
-   var endy = startY + startButtonWidth;
+   var endx = startX + startButtonWidth;
+   var endy = startY + startButtonHeight;
    if((x>=startX && y>=startY) && (x<=endx && y<=endy)){
          return[x,y];
       }
