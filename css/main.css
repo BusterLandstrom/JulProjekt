@@ -1,0 +1,10 @@
+@font-face
+{
+    font-family: PixelAzureBonds;
+    src: url(../fonts/PixelAzureBonds-327Z.ttf);
+}
+
+p
+{
+    font-family: PixelAzureBonds;
+}
