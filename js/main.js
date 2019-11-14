@@ -9,8 +9,8 @@ canvas.height = HEIGHT;
 
 let startButtonWidth = 300;
 let startButtonHeight = 80;
-let startX = 360;
-let startY = 270;
+let startButtonX = 360;
+let startButtonY = 270;
 
 ctx.beginPath();
 ctx.strokeStyle = 'brown';
@@ -18,31 +18,24 @@ ctx.lineWidth = '5';
 ctx.rect(0,0,1024,768);
 ctx.stroke();
 
-
 createButton = function(img, x, y, dheight, dwidth){
 ctx.drawImage(img, x, y, dheight, dwidth);
-ctx.stroke();
 };
 
 let img = document.getElementById('startGame')
-let startButton = new createButton( img, startX, startY, startButtonHeight, startButtonWidth);
-startButton.id = "startButtons";
+let startButton = new createButton( img, startButtonX, startButtonY, startButtonWidth, startButtonHeight);
 
-canvas.addEventListener("click", onCanvasClick, false);
+canvas.addEventListener("click", onStartClickEvent, false);
 
-function onCanvasClick(e){
-   alert(onClickEvent(e));
-};
-
-function onClickEvent(e){
+function onStartClickEvent(e){
    var rect = canvas.getBoundingClientRect();
    var x = e.clientX - rect.left;
    var y = e.clientY - rect.top;
-   var endx = startX + startButtonWidth;
-   var endy = startY + startButtonHeight;
-   if((x>=startX && y>=startY) && (x<=endx && y<=endy)){
-         return[x,y];
-      }
+   var endX = startButtonX + startButtonWidth;
+   var endY = startButtonY + startButtonHeight;
+   if((x>=startButtonX && y>=startButtonY) && (x<=endX && y<=endY)){
+      alert(x + ' ' + y);
+   }
 };
 
 let main = document.getElementsByTagName('main')[0];
