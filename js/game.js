@@ -41,29 +41,30 @@ var x = 320,  //Starting x for the character
 
 /**/ //Update function where movement is handeled
 function update() {
-    requestAnimationFrame(update);
+    requestAnimationFrame(update); //Updates canvas every frame
 
-    //Checking if the keys are pressed down
-    if /*W*/ (keys[87]) {
+    /**/ //Checking if the keys are pressed down and changes velocity accordingly
+    if /*W & uparrow*/ (keys[87] || keys[38]) {
         if (velY > -speed) {
             velY--;
         }
     }
-    if /*S*/ (keys[83]) {
+    if /*S & downarrow*/ (keys[83] || keys[40]) {
         if (velY < speed) {
             velY++;
         }
     }
-    if /*D*/ (keys[68]) {
+    if /*D & rightarrow*/ (keys[68] || keys[39]) {
         if (velX < speed) {
             velX++;
         }
     }
-    if /*A*/ (keys[65]) {
+    if /*A & leftarrow*/ (keys[65] || keys[37]) {
         if (velX > -speed) {
             velX--;
         }
     }
+    /**/
 
     /**/ //Bullet bounds check
     if (bulletxc < (WIDTH + 40)){
@@ -72,8 +73,8 @@ function update() {
             bulletVelocity++;
         }
         /**/
-    } else {
-        bulletxc = 120;
+    } else {        
+        bulletxc = 120; //Setting start position
     }
     /**/
 
