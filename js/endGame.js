@@ -104,9 +104,8 @@ function update() {
     if(stamina > staminaMax){
         stamina = staminaMax
     } else if(stamina <= 0){
-        
-    }
-    if (charHealthPoints > maxCharHealthPoints){
+        //Do nothing
+    } if (charHealthPoints > maxCharHealthPoints){
         charHealthPoints = maxCharHealthPoints
     } else if (charHealthPoints <= 0){
         window.open('death.html','_self');

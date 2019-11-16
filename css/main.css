@@ -1,4 +1,4 @@
-canvas {
+canvas /*Setting up the canvas*/ {
     position: absolute;
     top:0;
     bottom: 0;
@@ -7,14 +7,14 @@ canvas {
     margin:auto;
 }
 
-@font-face
+@font-face /*Initializing and setting up the font from the font file*/
 {
     font-family: PixelAzureBonds;
     src: local("PixelAzureBonds"),
     url(../fonts/PixelAzureBonds-327Z.ttf);
 }
 
-p
+p /*Setting the font value for the p element*/
 {
     font-family: "PixelAzureBonds";
 }
