@@ -30,19 +30,12 @@ var x = 320,  //Starting x for the character
     friction = 0.75, //Friction for the character
     characterWidth = 100, //Width of the main character
     characterHeight = 120, //Height of the character
-    bulletWidth = 40, //Projectile Width
-    bulletHeight = 40, //Projectile Height
-    bulletxc = 120, //Projectile x coordnates
-    bulletyc = 320, //Projectile y coordinates
-    bulletVelocity = 0, // Bullet velocity
-    bulletFriction = 1, // Bullet friction
-    bulletSpeed = 6, //Projectile speed
     charHealthPoints = 10, //Character hp
+    stamina = 200, //Setting up stamina for player dash
+    staminaMax = 200, //Setting up stamina for player dash
+    staminaW = 200, //StaminaBar width
+    staminaH = 20, //StaminaBar height
     i = -1, //I variable for text writing
-    projectileHit = new Audio("soundeffects/projectileHit.wav"), //Projectile hit sound
-    projectileShoot = new Audio("soundeffects/projectileShoot.wav"), //Projectile hit sound
-    canShoot = true, //Setting the boss shooting mechanics to true
-    shootTimeModifier = 0, //Setting shoot time delay to 0
     letter = [], //Text writing array
     /**/ //Text for  talking
     text =  new Array(
@@ -89,32 +82,59 @@ function update() {
     }
     /**/
 
-    if(bulletxc <= 127){
-        projectileShoot.play()
-    }
-
-    /**/ //Bullet bounds check
-    if (bulletxc < (WIDTH + 40)){
-        /**/ //Bullet moving if it is in frame
-        if (bulletVelocity < bulletSpeed) {
-            bulletVelocity++;
-        }
-        /**/
-    } else {
-        if(canShoot == true){     
-            bulletxc = 120; //Setting start position
-            canShoot = false;
-            shootTimeModifier = 5;
-            setInterval(updateShootMethod,5000);
-        } else{
-            //Do nothing
+    /**/ //Dashing mechanic
+    if /*W & uparrow*/ ((keys[87] || keys[38]) && keys[69]) {
+        if(stamina > 0){
+            if (velY > -(speed)) {
+                speed = 10;
+                velY--;
+                stamina += -1;
+            }
+        } else {
+            if (velY > -speed) {
+                velY--;
+            }
         }
     }
-    /**/
-
-    /**/ //Applies friction and move the character
-    bulletVelocity *= bulletFriction;
-    bulletxc += bulletVelocity;
+    if /*S & downarrow*/ ((keys[83] || keys[40]) && keys[69]) {
+        if(stamina > 0){
+            if (velY < speed) {
+                speed = 10;
+                velY++;
+                stamina += -1;
+            }
+        } else {
+            if (velY < speed) {
+                velY++;
+            }
+        }
+    }
+    if /*D & rightarrow*/ ((keys[68] || keys[39]) && keys[69]) {
+        if(stamina > 0){
+            if (velX < speed) {
+                speed = 10;
+                velX++;
+                stamina += -1;
+            }
+        } else {
+            if (velX < speed) {
+                velX++;
+            }
+        }
+    }
+    if /*A & leftarrow*/ ((keys[65] || keys[37]) && keys[69]) {
+        if(stamina > 0){
+            if (velX > -speed) {
+                speed = 10;
+                velX--;
+                stamina += -1;
+            }
+        } else {
+            if (velX > -speed) {
+                velX--;
+            }
+        }
+    }
     /**/
 
     /**/ // Applying friction so the character stops and moves according to the physics
@@ -143,66 +163,58 @@ function update() {
     /**/ //Drawing the placeholder character
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     characterImg = document.getElementById('character');
-    character = new createImage(characterImg, x, y, characterWidth, characterHeight);
+    character = createImage(characterImg, x, y, characterWidth, characterHeight);
     /**/
 
-    /**/ //Drawing and setting collision hitbox for projectile
-    bulletImg = document.getElementById('bullet');
-    bullet = new createImage(bulletImg, bulletxc, bulletyc, bulletWidth, bulletHeight);
-    var bulletx = bulletxc + (bulletWidth - 32);
-    var bullety = bulletyc + bulletHeight;
-    var combineX = x + characterWidth;
-    var combineY = y + characterHeight;
-    if((bulletyc<=combineY && y<=bullety) && (x<=bulletx && combineX>=bulletxc)){
-        // Collission Detected;
-        bulletxc = 2000;
-        updateText();
-        charHealthPoints += -1;
-        projectileHit.play();
-    }
-    /**/
-
-    let healthPointText = createText("black", pfont, "20px", "Health: " + charHealthPoints, 26, 36);
-    let writtenText = createText("black", pfont, "50px", letter.join(""), 510, 100);
+    healthPointText = createText("black", pfont, "18px", "Health: " + charHealthPoints, 26, 36);
+    staminaProgressBar = bar('blue');
     if (charHealthPoints <= 0){
         window.open('death.html','_self');
     }
 }
 /**/
+
+/**/ //Function that increases the i value so that text is displayed properly letter after letter
 function increaseI(){
     i += 1;
 }
+/**/
 
-function updateShootMethod(){
-    if (shootTimeModifier >= 5)
-    {
-        shootTimeModifier = 0;
-        canShoot = false;
-    }
-    else if (shootTimeModifier == 0)
-    {
-        shootTimeModifier = 5;
-        canShoot = true;
-    }
-}
-
+/**/ //Updates the letter array and puts correct letter in correct spot
 function writeText(){
     letter[i] = text[i];
 }
+/**/
 
+/**/ //createText function for easy text creation
 createText = function(fillStyles, fonts, fontsize, text, x, y) {
     ctx.font = fontsize + " " + fonts;
     ctx.fillStyle = fillStyles;
     ctx.fillText(text, x, y);
 };
+/**/
 
+/**/ //Updates and animates the text so it looks like it is being written
 function updateText(){
     requestAnimationFrame(updateText);
     writeText();
     increaseI();   
 }
+/**/
 
-update(); //Runnning the update function
+/**/ //Stamina bar
+bar = function(color){
+    ctx.fillStyle = 'gray';
+    ctx.fillRect(26, 80, staminaW, staminaH);
+    ctx.fillStyle = color;
+    ctx.fillRect(26, 80, stamina,staminaH);
+    staminaText = createText("black", pfont, "18px", "Stamina: " + stamina + "/" + staminaMax, 26, 96);
+}
+/**/
+
+
+update(); //Update function (always running and updating every frame)
+
 
 /**/ //Key down and up event listeners so the button activates on down press and deactivates on up release
 document.body.addEventListener("keydown", function (e) {

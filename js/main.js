@@ -71,7 +71,7 @@ function onStartClickEvent(e){
    var endX = startButtonX + startButtonWidth;
    var endY = startButtonY + startButtonHeight;
    if((x>=startButtonX && y>=startButtonY) && (x<=endX && y<=endY)){
-      window.open('game.html','_self');
+      window.open('levelone.html','_self');
    }
 };
 /**/
