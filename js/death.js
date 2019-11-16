@@ -1,6 +1,7 @@
 /**/ //Setting up the canvas
 const WIDTH = 1024;
 const HEIGHT = 768;
+
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 canvas.setAttribute("class", "border");
