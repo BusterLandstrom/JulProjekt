@@ -39,6 +39,10 @@ var x = 320,  //Starting x for the character
     bulletSpeed = 6, //Projectile speed
     charHealthPoints = 10, //Character hp
     i = -1, //I variable for text writing
+    projectileHit = new Audio("soundeffects/projectileHit.wav"), //Projectile hit sound
+    projectileShoot = new Audio("soundeffects/projectileShoot.wav"), //Projectile hit sound
+    canShoot = true, //Setting the boss shooting mechanics to true
+    shootTimeModifier = 0, //Setting shoot time delay to 0
     letter = [], //Text writing array
     /**/ //Text for  talking
     text =  new Array(
@@ -85,6 +89,10 @@ function update() {
     }
     /**/
 
+    if(bulletxc <= 127){
+        projectileShoot.play()
+    }
+
     /**/ //Bullet bounds check
     if (bulletxc < (WIDTH + 40)){
         /**/ //Bullet moving if it is in frame
@@ -92,8 +100,15 @@ function update() {
             bulletVelocity++;
         }
         /**/
-    } else {        
-        bulletxc = 120; //Setting start position
+    } else {
+        if(canShoot == true){     
+            bulletxc = 120; //Setting start position
+            canShoot = false;
+            shootTimeModifier = 5;
+            setInterval(updateShootMethod,5000);
+        } else{
+            //Do nothing
+        }
     }
     /**/
 
@@ -139,14 +154,16 @@ function update() {
     var combineX = x + characterWidth;
     var combineY = y + characterHeight;
     if((bulletyc<=combineY && y<=bullety) && (x<=bulletx && combineX>=bulletxc)){
-        //alert("Collision Detected");
+        // Collission Detected;
         bulletxc = 120;
         updateText();
         charHealthPoints += -1;
+        projectileHit.play();
     }
     /**/
+
     let healthPointText = createText("black", pfont, "20px", "Health: " + charHealthPoints, 26, 36);
-    let writtenText = createText("black", pfont, "50px", letter.join(""), 510, 100);
+    let writtenText = createText("black", pfont, "2px", letter.join(""), 510, 100);
     if (charHealthPoints <= 0){
         window.open('death.html','_self');
     }
@@ -154,6 +171,19 @@ function update() {
 /**/
 function increaseI(){
     i += 1;
+}
+
+function updateShootMethod(){
+    if (shootTimeModifier >= 5)
+    {
+        shootTimeModifier = 0;
+        canShoot = false;
+    }
+    else if (shootTimeModifier == 0)
+    {
+        shootTimeModifier = 5;
+        canShoot = true;
+    }
 }
 
 function writeText(){
@@ -167,9 +197,6 @@ createText = function(fillStyles, fonts, fontsize, text, x, y) {
 };
 
 function updateText(){
-    requestAnimationFrame(updateText);
-
-
     writeText();
     increaseI();
 }
