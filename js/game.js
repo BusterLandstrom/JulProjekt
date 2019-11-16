@@ -37,6 +37,24 @@ var x = 320,  //Starting x for the character
     bulletFriction = 1, // Bullet friction
     bulletSpeed = 6, //Projectile speed
     charHealthPoints = 10, //Character hp
+    i = -1, //I variable for text writing
+    letter = [], //Text writing array
+    /**/ //Text for  talking
+    text =  new Array(
+        "H",
+        "e",
+        "l",
+        "l",
+        "o",
+        " ",
+        "d",
+        "u",
+        "d",
+        "e",
+        ),
+    /**/
+    p = document.getElementById('ptext'), //Getting p element so i can use its font
+    pfont = css( p, 'font-family' ), //Setting text font from css
     keys = []; //What key is pressed
 
 /**/ //Update function where movement is handeled
@@ -120,11 +138,40 @@ function update() {
     var combineX = x + characterWidth;
     var combineY = y + characterHeight;
     if((bulletyc<=combineY && y<=bullety) && (x<=bulletx && combineX>=bulletxc)){
-        alert("Collision Detected");
+        //alert("Collision Detected");
+        bulletxc = 120;
+        updateText();
+        charHealthPoints += -1;
     }
     /**/
+    let healthPointText = createText("black", pfont, "20px", "Health: " + charHealthPoints, 26, 36);
+    let writtenText = createText("black", pfont, "50px", letter.join(""), 510, 100);
+    if (charHealthPoints <= 0){
+        window.open('death.html','_self');
+    }
 }
 /**/
+function increaseI(){
+    i += 1;
+}
+
+function writeText(){
+    letter[i] = text[i];
+}
+
+createText = function(fillStyles, fonts, fontsize, text, x, y) {
+    ctx.font = fontsize + " " + fonts;
+    ctx.fillStyle = fillStyles;
+    ctx.fillText(text, x, y);
+};
+
+function updateText(){
+    requestAnimationFrame(updateText);
+
+
+    writeText();
+    increaseI();
+}
 
 update(); //Runnning the update function
 
@@ -137,7 +184,7 @@ document.body.addEventListener("keyup", function (e) {
 });
 /**/
 
-/**/ //End Setting canvas
+/**/ //Appending canvas to main
 let main = document.getElementsByTagName('main')[0];
 main.appendChild(canvas);
 /**/

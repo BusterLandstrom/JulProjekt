@@ -30,16 +30,19 @@ let p = document.getElementById('ptext');
 let pfont = css( p, 'font-family' );
 let bgimg = document.getElementById('backgroundimage');
 let img = document.getElementById('startGame');
-let backgroundImg = new createImage (bgimg, 0,0, WIDTH, HEIGHT);
-let startButton = new createImage( img, startButtonX, startButtonY, startButtonWidth, startButtonHeight);
-ctx.beginPath();
+let backgroundImg = createImage (bgimg, 0,0, WIDTH, HEIGHT);
+let startButton = createImage( img, startButtonX, startButtonY, startButtonWidth, startButtonHeight);
 /**/
 
-/**/ //Setting the title text
+/**/ //Setting the frame line
+ctx.beginPath();
 ctx.strokeStyle = 'brown';
 ctx.lineWidth = '5';
 ctx.rect(0,0,1024,768);
 ctx.stroke();
+/**/
+
+/**/ //Setting the title text
 ctx.font = "100px " +  pfont;
 ctx.textAlign = 'center';
 ctx.fillStyle = 'white';
@@ -72,7 +75,7 @@ function onStartClickEvent(e){
 };
 /**/
 
-/**/ //End Setting canvas
+/**/ //Appending canvas to main
 let main = document.getElementsByTagName('main')[0];
 main.appendChild(canvas);
 /**/
