@@ -61,7 +61,7 @@ ctx.fillStyle = 'white';
 ctx.fillText("© Copyright 2019", 510, 740);
 /**/
 
-canvas.addEventListener("click", onStartClickEvent, false); //Event listener so the startbutton click funtion works
+canvas.addEventListener("click", onStartClickEvent, false); //Event listener so the start button click funtion works
 
 /**/ //Start button click function
 function onStartClickEvent(e){

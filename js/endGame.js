@@ -43,10 +43,17 @@ var x = 320,  //Starting x for the character
     projectileShoot = new Audio("soundeffects/projectileShoot.wav"), //Projectile hit sound
     canShoot = true, //Setting the boss shooting mechanics to true
     shootTimeModifier = 0, //Setting shoot time delay to 0
-    stamina = 200, //Setting up stamina for player dash
-    staminaMax = 200, //Setting up stamina for player dash
-    staminaW = 200, //StaminaBar width
-    staminaH = 20, //StaminaBar height
+    charHealthPoints = 100, //Character hp
+    stamina = 20, //Setting up stamina for player dash
+    staminaMax = 20, //Setting up stamina for player dash
+    staminaW = 200, //StaminaBar width also used for health bar
+    staminaH = 20, //StaminaBar height also used for health bar
+    maxCharHealthPoints = 100, //Max hp for character
+    invOn = false, //Setting so that the inventory is not viewing all the time
+    invButtonX = 900, //Inv button x coordinates
+    invButtonY = 36, //Inv button y coordinates
+    invButtonW = 512/6, //Inventory button width
+    invButtonH = 512/6, //Inventory button height
     letter = [], //Text writing array
     /**/ //Text for  talking
     text =  new Array(
@@ -90,6 +97,19 @@ function update() {
         if (velX > -speed) {
             velX--;
         }
+    }
+    /**/
+
+    /**/ //Setting override for both stamina and health
+    if(stamina > staminaMax){
+        stamina = staminaMax
+    } else if(stamina <= 0){
+        
+    }
+    if (charHealthPoints > maxCharHealthPoints){
+        charHealthPoints = maxCharHealthPoints
+    } else if (charHealthPoints <= 0){
+        window.open('death.html','_self');
     }
     /**/
 
@@ -221,12 +241,20 @@ function update() {
     }
     /**/
 
-    healthPointText = createText("black", pfont, "20px", "Health: " + charHealthPoints, 26, 36);
-    writtenText = createText("black", pfont, "50px", letter.join(""), 510, 100);
-    staminaProgressBar = bar('blue');
-    if (charHealthPoints <= 0){
-        window.open('death.html','_self');
+    /**/ //Set the inventory
+    inventoryImg = document.getElementById('inventory');
+    invImg = document.getElementById('invLogo');
+    invLogo = createImage(invImg, invButtonX, invButtonY, invButtonW, invButtonH);
+    if(invOn){
+        character = createImage(inventoryImg, 200, 160, 640, 420);
+    } else if (!invOn){
+        //Do nothing
     }
+    /**/
+
+    writtenText = createText("black", pfont, "50px", letter.join(""), 510, 100);
+    staminaProgressBar = stamBar('noFill', 'fill');
+    healthProgressBar = healthBar();
 }
 /**/
 
@@ -274,17 +302,45 @@ function updateText(){
 /**/
 
 /**/ //Stamina bar
-bar = function(color){
-    ctx.fillStyle = 'gray';
-    ctx.fillRect(26, 80, staminaW, staminaH);
-    ctx.fillStyle = color;
-    ctx.fillRect(26, 80, stamina,staminaH);
-    staminaText = createText("black", pfont, "18px", "Stamina: " + stamina + "/" + staminaMax, 26, 96);
+stamBar = function(imgid,imgid2){
+    barimg = document.getElementById(imgid);
+    barimgfill = document.getElementById(imgid2);
+    barNo = createImage(barimg, 26, 80, staminaW, staminaH)
+    barFill = createImage(barimgfill, 26, 80, stamina * 10, staminaH);
+    staminaText = createText("black", pfont, "17px", "Stamina: " + stamina + "/" + staminaMax, 32, 96);
+}
+/**/
+
+/**/ //Health bar
+healthBar = function (){
+    hpbar = document.getElementById('noFill');
+    barimgHP = document.getElementById('HPfill');
+    barNoHP = createImage(hpbar, 26, 36, staminaW, staminaH)
+    barFillHP = createImage(barimgHP, 26, 36, charHealthPoints * 2, staminaH);
+    healthPointText = createText("black", pfont, "17px", "Health: " + charHealthPoints + "/" + maxCharHealthPoints, 32, 52);
+}
+/**/
+
+canvas.addEventListener("click", invClick, false); //Event listener so the inventory button click funtion works
+
+/**/ //Inventory click
+function invClick(e){
+    var rect = canvas.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    var invX = invButtonX + invButtonW;
+    var invY = invButtonY + invButtonH;
+    if((x>=invButtonX && y>=invButtonY) && (x<=invX && y<=invY)){
+        if (!invOn){
+            invOn = true;
+        } else if (invOn){
+            invOn = false;
+        }
+    }
 }
 /**/
 
 update();
-
 
 /**/ //Key down and up event listeners so the button activates on down press and deactivates on up release
 document.body.addEventListener("keydown", function (e) {
