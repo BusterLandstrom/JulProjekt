@@ -1,32 +1,65 @@
+/**/ //Setting up the canvas
 const WIDTH = 1024;
 const HEIGHT = 768;
-
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 canvas.setAttribute("class", "border");
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
+/**/
 
-let startButtonWidth = 300;
-let startButtonHeight = 80;
-let startButtonX = 360;
-let startButtonY = 270;
+let startButtonWidth = 300; //Setting the start button width
+let startButtonHeight = 80; //Setting the start button height
+let startButtonX = 350; //Setting the x position on the canvas for the start button
+let startButtonY = 420; //Setting the y position on the canvas for the start button
 
+/**/ //Create image function for easier image creation and nameing
+createImage = function(img, x, y, dheight, dwidth){
+ctx.drawImage(img, x, y, dheight, dwidth);
+};
+/**/
+
+/**/ //CSS function to get font size and font family easier
+function css( element, property ) {
+   return window.getComputedStyle( element, null ).getPropertyValue( property );
+}
+/**/
+
+/**/ //Setting up for image and font drawing
+let p = document.getElementById('ptext');
+let pfont = css( p, 'font-family' );
+let bgimg = document.getElementById('backgroundimage');
+let img = document.getElementById('startGame');
+let backgroundImg = new createImage (bgimg, 0,0, WIDTH, HEIGHT);
+let startButton = new createImage( img, startButtonX, startButtonY, startButtonWidth, startButtonHeight);
 ctx.beginPath();
+/**/
+
+/**/ //Setting the title text
 ctx.strokeStyle = 'brown';
 ctx.lineWidth = '5';
 ctx.rect(0,0,1024,768);
 ctx.stroke();
+ctx.font = "100px " +  pfont;
+ctx.textAlign = 'center';
+ctx.fillStyle = 'white';
+ctx.fillText("The Ghosts", 510, 165);
+ctx.font = "110px " + pfont;
+ctx.textAlign = 'center';
+ctx.fillStyle = 'white'; 
+ctx.fillText("of Christmas", 512, 298);
+/**/
 
-createButton = function(img, x, y, dheight, dwidth){
-ctx.drawImage(img, x, y, dheight, dwidth);
-};
+/**/ //Setting copyright text (for fun)
+ctx.font = "20px " + pfont;
+ctx.textAlign = 'center';
+ctx.fillStyle = 'white'; 
+ctx.fillText("© Copyright 2019", 510, 740);
+/**/
 
-let img = document.getElementById('startGame')
-let startButton = new createButton( img, startButtonX, startButtonY, startButtonWidth, startButtonHeight);
+canvas.addEventListener("click", onStartClickEvent, false); //Event listener so the startbutton click funtion works
 
-canvas.addEventListener("click", onStartClickEvent, false);
-
+/**/ //Start button click function
 function onStartClickEvent(e){
    var rect = canvas.getBoundingClientRect();
    var x = e.clientX - rect.left;
@@ -34,9 +67,12 @@ function onStartClickEvent(e){
    var endX = startButtonX + startButtonWidth;
    var endY = startButtonY + startButtonHeight;
    if((x>=startButtonX && y>=startButtonY) && (x<=endX && y<=endY)){
-      alert(x + ' ' + y);
+      window.open('game.html','_self');
    }
 };
+/**/
 
+/**/ //End Setting canvas
 let main = document.getElementsByTagName('main')[0];
 main.appendChild(canvas);
+/**/
