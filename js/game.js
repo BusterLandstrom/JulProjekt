@@ -155,7 +155,7 @@ function update() {
     var combineY = y + characterHeight;
     if((bulletyc<=combineY && y<=bullety) && (x<=bulletx && combineX>=bulletxc)){
         // Collission Detected;
-        bulletxc = 120;
+        bulletxc = 2000;
         updateText();
         charHealthPoints += -1;
         projectileHit.play();
@@ -163,7 +163,7 @@ function update() {
     /**/
 
     let healthPointText = createText("black", pfont, "20px", "Health: " + charHealthPoints, 26, 36);
-    let writtenText = createText("black", pfont, "2px", letter.join(""), 510, 100);
+    let writtenText = createText("black", pfont, "50px", letter.join(""), 510, 100);
     if (charHealthPoints <= 0){
         window.open('death.html','_self');
     }
@@ -197,8 +197,9 @@ createText = function(fillStyles, fonts, fontsize, text, x, y) {
 };
 
 function updateText(){
+    requestAnimationFrame(updateText);
     writeText();
-    increaseI();
+    increaseI();   
 }
 
 update(); //Runnning the update function
