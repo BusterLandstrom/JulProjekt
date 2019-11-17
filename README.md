@@ -1,2 +1,2 @@
 "# JulProjekt"  
-Grupp: 
+Grupp: Viktor, Phonthakorn, Lucas, William
