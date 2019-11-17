@@ -26,6 +26,15 @@ function css( element, property ) {
 }
 /**/
 
+backgroundMusic = new Audio('soundeffects/backgroundMusic.wav');
+
+function update(){
+   requestAnimationFrame(update);
+   backgroundMusic.play();
+}
+
+update();
+
 /**/ //Setting up for image and font drawing
 let p = document.getElementById('ptext');
 let pfont = css( p, 'font-family' );
