@@ -42,7 +42,11 @@ function onStartClickEvent(e){
 
 deathSound = new Audio('/soundeffects/deathSound.wav');
 
-window.onload(deathSound.play());
+deathSoundLoad();
+
+function deathSoundLoad(){
+   deathSound.play();
+}
 
 /**/ //Appending canvas to main
 let main = document.getElementsByTagName('main')[0];
