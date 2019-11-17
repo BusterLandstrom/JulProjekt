@@ -40,7 +40,8 @@ Inventory = function(){
         };
         return self;
     }
-    item('godsword','Sword of the gods', function(){
-
+    item('hpPotion','Healing Potion', function(){
+        charHealthPoints += 20;
+        removeItem('hpPotion', 1);
     });
 }

@@ -9,6 +9,7 @@ var x = 320,  //Starting x for the character
     staminaH = 20, //StaminaBar height also used for health bar
     maxCharHealthPoints = 100, //Max hp for character
     running = false, //If character is running or not
+    canSprint = true, //Setting the sprinting varuable so you can only sprint when you have more than 0 stamina
     keys = []; //What key is pressed
 
 /**/ //Movement function
@@ -67,7 +68,7 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
 
     /**/ //Dashing mechanic
     if /*W & uparrow*/ ((keys[87] || keys[38]) && keys[81]) {
-        if(stamina > 0){
+        if(canSprint == true){
             if (velY > -(speed)) {
                 speed = 10;
                 velY--;
@@ -81,7 +82,7 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
         }
     }
     if /*S & downarrow*/ ((keys[83] || keys[40]) && keys[81]) {
-        if(stamina > 0){
+        if(canSprint == true){
             if (velY < speed) {
                 speed = 10;
                 velY++;
@@ -95,7 +96,7 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
         }
     }
     if /*D & rightarrow*/ ((keys[68] || keys[39]) && keys[81]) {
-        if(stamina > 0){
+        if(canSprint == true){
             if (velX < speed) {
                 speed = 10;
                 velX++;
@@ -109,7 +110,7 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
         }
     }
     if /*A & leftarrow*/ ((keys[65] || keys[37]) && keys[81]) {
-        if(stamina > 0){
+        if(canSprint == true){
             if (velX > -speed) {
                 speed = 10;
                 velX--;
@@ -126,12 +127,15 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
 
     /**/ //Stamina override
     if (running){
-        stamina += -0.04;
+        stamina += -0.07;
     } else if (!running){
         stamina += 0.02;
     } if(stamina <= 0){
         running = false;
-    } else if (stamina > staminaMax){
+        canSprint = false;
+    } else if (stamina > 0){
+        canSprint = true;
+    } if (stamina > staminaMax){
         stamina = staminaMax;
     }
     /**/
