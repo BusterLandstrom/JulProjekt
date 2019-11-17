@@ -41,6 +41,7 @@ var x = 320,  //Starting x for the character
     invButtonY = 36, //Inv button y coordinates
     invButtonW = 512/6, //Inventory button width
     invButtonH = 512/6, //Inventory button height
+    running = false, //If character is running or not
     i = -1, //I variable for text writing
     letter = [], //Text writing array
     /**/ //Text for  talking
@@ -69,31 +70,31 @@ function update() {
     if /*W & uparrow*/ (keys[87] || keys[38]) {
         if (velY > -speed) {
             velY--;
+            running = false;
         }
     }
     if /*S & downarrow*/ (keys[83] || keys[40]) {
         if (velY < speed) {
             velY++;
+            running = false;
         }
     }
     if /*D & rightarrow*/ (keys[68] || keys[39]) {
         if (velX < speed) {
             velX++;
+            running = false;
         }
     }
     if /*A & leftarrow*/ (keys[65] || keys[37]) {
         if (velX > -speed) {
             velX--;
+            running = false;
         }
     }
     /**/
 
-    /**/ //Setting override for both stamina and health
-    if(stamina > staminaMax){
-        stamina = staminaMax
-    } else if(stamina <= 0){
-        //Do nothing
-    } if (charHealthPoints > maxCharHealthPoints){
+    /**/ //Setting override for health
+    if (charHealthPoints > maxCharHealthPoints){
         charHealthPoints = maxCharHealthPoints
     } else if (charHealthPoints <= 0){
         window.open('death.html','_self');
@@ -106,11 +107,12 @@ function update() {
             if (velY > -(speed)) {
                 speed = 10;
                 velY--;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velY > -speed) {
                 velY--;
+                running = false;
             }
         }
     }
@@ -119,11 +121,12 @@ function update() {
             if (velY < speed) {
                 speed = 10;
                 velY++;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velY < speed) {
                 velY++;
+                running = false;
             }
         }
     }
@@ -132,11 +135,12 @@ function update() {
             if (velX < speed) {
                 speed = 10;
                 velX++;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velX < speed) {
                 velX++;
+                running = false;
             }
         }
     }
@@ -145,13 +149,26 @@ function update() {
             if (velX > -speed) {
                 speed = 10;
                 velX--;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velX > -speed) {
                 velX--;
+                running = false;
             }
         }
+    }
+    /**/
+
+    /**/ //Stamina override
+    if (running){
+        stamina += -0.04;
+    } else if (!running){
+        stamina += 0.02;
+    } if(stamina <= 0){
+        running = false;
+    } else if (stamina > staminaMax){
+        stamina = staminaMax;
     }
     /**/
 
@@ -189,7 +206,7 @@ function update() {
     invImg = document.getElementById('invLogo');
     invLogo = createImage(invImg, invButtonX, invButtonY, invButtonW, invButtonH);
     if(invOn){
-        character = createImage(inventoryImg, 200, 160, 640, 420);
+        character = createImage(inventoryImg, 150, 130, 740, 540);
     } else if (!invOn){
         //Do nothing
     }
@@ -236,7 +253,7 @@ stamBar = function(imgid,imgid2){
     barimgfill = document.getElementById(imgid2);
     barNo = createImage(barimg, 26, 80, staminaW, staminaH)
     barFill = createImage(barimgfill, 26, 80, stamina * 10, staminaH);
-    staminaText = createText("black", pfont, "17px", "Stamina: " + stamina + "/" + staminaMax, 32, 96);
+    staminaText = createText("black", pfont, "17px", "Stamina: " + Math.round(stamina) + "/" + staminaMax, 32, 96);
 }
 /**/
 

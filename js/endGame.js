@@ -245,7 +245,7 @@ function update() {
     invImg = document.getElementById('invLogo');
     invLogo = createImage(invImg, invButtonX, invButtonY, invButtonW, invButtonH);
     if(invOn){
-        character = createImage(inventoryImg, 200, 160, 640, 420);
+        character = createImage(inventoryImg, 150, 130, 740, 540);
     } else if (!invOn){
         //Do nothing
     }
