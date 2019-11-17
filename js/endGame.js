@@ -118,11 +118,12 @@ function update() {
             if (velY > -(speed)) {
                 speed = 10;
                 velY--;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velY > -speed) {
                 velY--;
+                running = false;
             }
         }
     }
@@ -131,11 +132,12 @@ function update() {
             if (velY < speed) {
                 speed = 10;
                 velY++;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velY < speed) {
                 velY++;
+                running = false;
             }
         }
     }
@@ -144,11 +146,12 @@ function update() {
             if (velX < speed) {
                 speed = 10;
                 velX++;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velX < speed) {
                 velX++;
+                running = false;
             }
         }
     }
@@ -157,11 +160,12 @@ function update() {
             if (velX > -speed) {
                 speed = 10;
                 velX--;
-                stamina += -1;
+                running = true;
             }
         } else {
             if (velX > -speed) {
                 velX--;
+                running = false;
             }
         }
     }
@@ -187,6 +191,18 @@ function update() {
         } else{
             //Do nothing
         }
+    }
+    /**/
+
+    /**/ //Stamina override
+    if (running){
+        stamina += -0.04;
+    } else if (!running){
+        stamina += 0.02;
+    } if(stamina <= 0){
+        running = false;
+    } else if (stamina > staminaMax){
+        stamina = staminaMax;
     }
     /**/
 
