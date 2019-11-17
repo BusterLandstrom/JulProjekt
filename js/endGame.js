@@ -22,12 +22,10 @@ function css( element, property ) {
 };
 /**/
 
-var x = 320,  //Starting x for the character
-    y = 450,  //Starting y for the character
-    velY = 0, //velocity on the y axis for the character
+var velY = 0, //velocity on the y axis for the character
     velX = 0, //Velocity on the x axis for the character
-    speed = 3, //Max speed fo the character
-    friction = 0.75, //Friction for the character
+    speed = 8, //Max speed fo the character
+    friction = 2, //Friction for the character
     characterWidth = 100, //Width of the main character
     characterHeight = 120, //Height of the character
     bulletWidth = 40, //Projectile Width
@@ -77,99 +75,7 @@ var x = 320,  //Starting x for the character
 function update() {
     requestAnimationFrame(update); //Updates canvas every frame
 
-    /**/ //Checking if the keys are pressed down and changes velocity accordingly
-    if /*W & uparrow*/ (keys[87] || keys[38]) {
-        if (velY > -speed) {
-            velY--;
-        }
-    }
-    if /*S & downarrow*/ (keys[83] || keys[40]) {
-        if (velY < speed) {
-            velY++;
-        }
-    }
-    if /*D & rightarrow*/ (keys[68] || keys[39]) {
-        if (velX < speed) {
-            velX++;
-        }
-    }
-    if /*A & leftarrow*/ (keys[65] || keys[37]) {
-        if (velX > -speed) {
-            velX--;
-        }
-    }
-    /**/
-
-    /**/ //Setting override for both stamina and health
-    if(stamina > staminaMax){
-        stamina = staminaMax
-    } else if(stamina <= 0){
-        //Do nothing
-    } if (charHealthPoints > maxCharHealthPoints){
-        charHealthPoints = maxCharHealthPoints
-    } else if (charHealthPoints <= 0){
-        window.open('death.html','_self');
-    }
-    /**/
-
-    /**/ //Dashing mechanic
-    if /*W & uparrow*/ ((keys[87] || keys[38]) && keys[69]) {
-        if(stamina > 0){
-            if (velY > -(speed)) {
-                speed = 10;
-                velY--;
-                running = true;
-            }
-        } else {
-            if (velY > -speed) {
-                velY--;
-                running = false;
-            }
-        }
-    }
-    if /*S & downarrow*/ ((keys[83] || keys[40]) && keys[69]) {
-        if(stamina > 0){
-            if (velY < speed) {
-                speed = 10;
-                velY++;
-                running = true;
-            }
-        } else {
-            if (velY < speed) {
-                velY++;
-                running = false;
-            }
-        }
-    }
-    if /*D & rightarrow*/ ((keys[68] || keys[39]) && keys[69]) {
-        if(stamina > 0){
-            if (velX < speed) {
-                speed = 10;
-                velX++;
-                running = true;
-            }
-        } else {
-            if (velX < speed) {
-                velX++;
-                running = false;
-            }
-        }
-    }
-    if /*A & leftarrow*/ ((keys[65] || keys[37]) && keys[69]) {
-        if(stamina > 0){
-            if (velX > -speed) {
-                speed = 10;
-                velX--;
-                running = true;
-            }
-        } else {
-            if (velX > -speed) {
-                velX--;
-                running = false;
-            }
-        }
-    }
-    /**/
+    WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT);
 
     if(bulletxc <= 127){
         projectileShoot.play()
@@ -194,50 +100,9 @@ function update() {
     }
     /**/
 
-    /**/ //Stamina override
-    if (running){
-        stamina += -0.04;
-    } else if (!running){
-        stamina += 0.02;
-    } if(stamina <= 0){
-        running = false;
-    } else if (stamina > staminaMax){
-        stamina = staminaMax;
-    }
-    /**/
-
     /**/ //Applies friction and move the character
     bulletVelocity *= bulletFriction;
     bulletxc += bulletVelocity;
-    /**/
-
-    /**/ // Applying friction so the character stops and moves according to the physics
-    velY *= friction;
-    y += velY;
-    velX *= friction;
-    x += velX;
-    /**/
-
-    /**/ // Checking for bounds On the x axis
-    if (x >= (WIDTH - 78)) {
-        x = (WIDTH - 78);
-    } else if (x <= 3) {
-        x = 3;
-    }
-    /**/
-
-    /**/ // Checking for bounds On the y axis
-    if (y > (HEIGHT - 120)) {
-        y = (HEIGHT - 120);
-    } else if (y <= 3) {
-        y = 3;
-    }
-    /**/
-
-    /**/ //Drawing the placeholder character
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
-    characterImg = document.getElementById('character');
-    character = createImage(characterImg, x, y, characterWidth, characterHeight);
     /**/
 
     /**/ //Drawing and setting collision hitbox for projectile
