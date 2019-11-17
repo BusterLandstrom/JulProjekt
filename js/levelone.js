@@ -42,22 +42,167 @@ var x = 320,  //Starting x for the character
     invButtonW = 512/6, //Inventory button width
     invButtonH = 512/6, //Inventory button height
     running = false, //If character is running or not
+    fadingVal = 1024, //Fading in value
+    fadingDisVal = 10, //Fading value for text to disappear after it has appeared
     i = -1, //I variable for text writing
     letter = [], //Text writing array
+    letter2 = [], //Text writing array
+    letter3 = [], //Text writing array
     /**/ //Text for  talking
     text =  new Array(
-        "H",
-        "e",
-        "l",
-        "l",
-        "o",
+        "A",
+        "a",
+        "a",
+        "a",
+        "a",
+        "h",
+        " ",
+        "I",
         " ",
         "d",
-        "u",
-        "d",
         "e",
+        "f",
+        "i",
+        "n",
+        "i",
+        "t",
+        "e",
+        "l",
+        "y",
+        " ",
+        "d",
+        "i",
+        "d",
+        "n",
+        "'",
+        "t",
+        " ",
+        "s",
+        "l",
+        "e",
+        "e",
+        "p",
+        " ",
+        "w",
+        "e",
+        "l",
+        "l",
+        ".",
         ),
     /**/
+    /**/ //Text2 for  talking
+    text2 =  new Array(
+        "G",
+        "o",
+        "o",
+        "d",
+        " ",
+        "m",
+        "o",
+        "r",
+        "n",
+        "i",
+        "n",
+        "g",
+        " ",
+        "G",
+        "r",
+        "e",
+        "y",
+        ".",
+        "W",
+        "e",
+        " ",
+        "c",
+        "a",
+        "n",
+        " ",
+        "s",
+        "e",
+        "e",
+        " ",
+        "t",
+        "h",
+        "a",
+        "t",
+        " ",
+        "y",
+        "o",
+        "u",
+        " ",
+        "h",
+        "a",
+        "v",
+        "e",
+        " ",
+        "n",
+        "o",
+        "t",
+        " ",
+        "s",
+        "l",
+        "e",
+        "p",
+        "t",
+        " ",
+        "w",
+        "e",
+        "l",
+        "l",
+        ".",
+        ),
+    /**/
+    /**/ //Text3 for  talking
+    text3 =  new Array(
+        "W",
+        "H",
+        "O",
+        " ",
+        "A",
+        "R",
+        "E",
+        " ",
+        "Y",
+        "O",
+        "U",
+        " ",
+        "A",
+        "N",
+        "D",
+        " ",
+        "W",
+        "H",
+        "A",
+        "T",
+        " ",
+        "A",
+        "R",
+        "E",
+        " ",
+        "Y",
+        "O",
+        "U",
+        " ",
+        "D",
+        "O",
+        "I",
+        "N",
+        "G",
+        " ",
+        "I",
+        "N",
+        " ",
+        "M",
+        "Y",
+        " ",
+        "H",
+        "O",
+        "U",
+        "S",
+        "E",
+        "?",
+        "!",
+    ),
     p = document.getElementById('ptext'), //Getting p element so i can use its font
     pfont = css( p, 'font-family' ), //Setting text font from css
     keys = []; //What key is pressed
@@ -211,13 +356,52 @@ function update() {
         //Do nothing
     }
     /**/
+    
+    /**/ //Fading into scene on load
+    window.onload = load();
+    /**/
 
+    /**/ //Setting the fading rect to get removed when scene is loaded
+    if ((fadingVal <= WIDTH) && (fadingVal > 0)){
+        fadingVal += -35;
+    } if (fadingVal < -5){
+        fadingRect = 1;
+    }
+    /**/
+
+    if (fadingVal < 0){
+        fadingDisVal += -0.045;
+    }
+
+    /**/ //Starting dialogue initial
+    if(fadingDisVal > 0){
+        startDialogue = createText('black', pfont, "20px", letter.join(""), 40, 640);
+    } else if ((fadingDisVal > -10) && (fadingDisVal < 0)){
+        secondDialogue = createText('black', pfont, "20px", letter2.slice(0,18).join(""), 40, 640);
+        secondDialogue2 = createText('black', pfont, "20px", letter2.slice(18,62).join(""), 40, 670);
+    } else if ((fadingDisVal < -10) && (fadingDisVal > -20)){
+        secondDialogue = createText('black', pfont, "20px", letter3.join(""), 40, 640);
+    }
+    /**/
+
+    /**/ //Starting start text/dialogue
+    if (fadingRect == 1){
+        updateText();
+        fadingRect = 0;
+        setInterval(changeFadeVal,2000);
+    }
+    /**/
+    
     /**/ //Setting the stat bars
     staminaProgressBar = stamBar('noFill', 'fill');
     healthProgressBar = healthBar();
     /**/
 }
 /**/
+
+function changeFadeVal(){
+    fadingVal = -3;
+}
 
 /**/ //Function that increases the i value so that text is displayed properly letter after letter
 function increaseI(){
@@ -228,8 +412,15 @@ function increaseI(){
 /**/ //Updates the letter array and puts correct letter in correct spot
 function writeText(){
     letter[i] = text[i];
+    letter2[i] = text2[i];
+    letter3[i] = text3[i];
 }
 /**/
+
+function load(){
+    ctx.fillStyle = "black";
+    fadingRect = ctx.fillRect(0, 0, fadingVal, HEIGHT)
+}
 
 /**/ //createText function for easy text creation
 createText = function(fillStyles, fonts, fontsize, text, x, y) {
@@ -242,8 +433,8 @@ createText = function(fillStyles, fonts, fontsize, text, x, y) {
 /**/ //Updates and animates the text so it looks like it is being written
 function updateText(){
     requestAnimationFrame(updateText);
+    increaseI();
     writeText();
-    increaseI();   
 }
 /**/
 
