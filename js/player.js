@@ -68,77 +68,64 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
 
     /**/ //Dashing mechanic
     if /*W & uparrow*/ ((keys[87] || keys[38]) && keys[81]) {
-        if(canSprint == true){
+        if (canSprint == true) {
             if (velY > -(speed)) {
                 speed = 10;
                 velY--;
                 running = true;
             }
-        } else {
-            if (velY > -speed) {
-                velY--;
-                running = false;
-            }
         }
     }
     if /*S & downarrow*/ ((keys[83] || keys[40]) && keys[81]) {
-        if(canSprint == true){
+        if (canSprint == true) {
             if (velY < speed) {
                 speed = 10;
                 velY++;
                 running = true;
-            }
-        } else {
-            if (velY < speed) {
-                velY++;
-                running = false;
             }
         }
     }
     if /*D & rightarrow*/ ((keys[68] || keys[39]) && keys[81]) {
-        if(canSprint == true){
+        if (canSprint == true) {
             if (velX < speed) {
                 speed = 10;
                 velX++;
                 running = true;
-            }
-        } else {
-            if (velX < speed) {
-                velX++;
-                running = false;
             }
         }
     }
     if /*A & leftarrow*/ ((keys[65] || keys[37]) && keys[81]) {
-        if(canSprint == true){
+        if (canSprint == true) {
             if (velX > -speed) {
                 speed = 10;
                 velX--;
                 running = true;
-            }
-        } else {
-            if (velX > -speed) {
-                velX--;
-                running = false;
             }
         }
     }
     /**/
 
-    /**/ //Stamina override
-    if (running){
-        stamina += -0.07;
-    } else if (!running){
-        stamina += 0.02;
-    } if(stamina <= 0){
-        running = false;
-        canSprint = false;
-    } else if (stamina > 0){
-        canSprint = true;
-    } if (stamina > staminaMax){
-        stamina = staminaMax;
-    }
-    /**/
+        /**/ //Stamina override
+        if (running) {
+            stamina += -0.07;
+        }
+        else if (!running) {
+            stamina += 0.02;
+        }
+        if (stamina <= 0) {
+            canSprint = false;
+            running = false;
+        }
+        else if (stamina > 1) {
+            setTimeout(onStamina, 3000);
+        }
+        if (stamina > staminaMax) {
+            stamina = staminaMax;
+        }
+        else if (stamina < 0) {
+            stamina = 0;
+        }
+        /**/
 
     /**/ // Applying friction so the character stops and moves according to the physics
     velY *= friction;
@@ -181,3 +168,7 @@ healthBar = function (){
     healthPointText = createText("black", pfont, "17px", "Health: " + charHealthPoints + "/" + maxCharHealthPoints, 32, 52);
 }
 /**/
+
+function onStamina(){
+    canSprint = true;
+}
