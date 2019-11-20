@@ -65,7 +65,8 @@ function bulletScript() {
                     bulletxc = 2000;
                 }
             } else {
-                charHealthPoints += -2;
+                charHealthPoints += -25;
+                bulletxc = 2000;
             }
         }
     }
