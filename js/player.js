@@ -117,7 +117,7 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
             running = false;
         }
         else if (stamina > 1) {
-            setTimeout(onStamina, 3000);
+            onStamina();
         }
         if (stamina > staminaMax) {
             stamina = staminaMax;
@@ -146,7 +146,7 @@ function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
     document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
     });
-/**/
+    /**/
 }
 
 /**/ //Stamina bar
@@ -169,6 +169,12 @@ healthBar = function (){
 }
 /**/
 
+/**/ //Stamina can sprint function
 function onStamina(){
     canSprint = true;
+}
+/**/
+
+function itemAdd(){
+    addItem(0, 240, 240, 70, 70, x, y, characterWidth, characterHeight); //Adding item to level
 }

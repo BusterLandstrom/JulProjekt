@@ -200,14 +200,15 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
 function update() {
     requestAnimationFrame(update); //Updates canvas every frame
 
-    WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT);  
-    
+    WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT); //Updates walking animaiton and scripts
+
+
     /**/ //Set the inventory
     inventoryImg = document.getElementById('inventory');
     invImg = document.getElementById('invLogo');
     invLogo = createImage(invImg, invButtonX, invButtonY, invButtonW, invButtonH);
     if(invOn){
-        character = createImage(inventoryImg, 150, 130, 740, 540);
+        inventoryObj = createImage(inventoryImg, 150, 130, 740, 540);
     } else if (!invOn){
         //Do nothing
     }
@@ -252,6 +253,7 @@ function update() {
     staminaProgressBar = stamBar('noFill', 'fill');
     healthProgressBar = healthBar();
     /**/
+    itemAdd(); //Spawns item in level
 }
 /**/
 
@@ -273,10 +275,12 @@ function writeText(){
 }
 /**/
 
+/**/ //Loads the loading box
 function load(){
     ctx.fillStyle = "black";
     fadingRect = ctx.fillRect(0, 0, fadingVal, HEIGHT)
 }
+/**/
 
 /**/ //createText function for easy text creation
 createText = function(fillStyles, fonts, fontsize, text, x, y) {
