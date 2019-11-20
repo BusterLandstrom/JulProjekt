@@ -28,18 +28,8 @@ var velY = 0, //velocity on the y axis for the character
     friction = 2, //Friction for the character
     characterWidth = 100, //Width of the main character
     characterHeight = 120, //Height of the character
-    bulletWidth = 40, //Projectile Width
-    bulletHeight = 40, //Projectile Height
-    bulletxc = 120, //Projectile x coordnates
-    bulletyc = 320, //Projectile y coordinates
-    bulletVelocity = 0, // Bullet velocity
-    bulletFriction = 1, // Bullet friction
-    bulletSpeed = 6, //Projectile speed
     charHealthPoints = 10, //Character hp
     i = -1, //I variable for text writing
-    projectileHit = new Audio("soundeffects/projectileHit.wav"), //Projectile hit sound
-    projectileShoot = new Audio("soundeffects/projectileShoot.wav"), //Projectile hit sound
-    canShoot = true, //Setting the boss shooting mechanics to true
     shootTimeModifier = 0, //Setting shoot time delay to 0
     charHealthPoints = 100, //Character hp
     stamina = 20, //Setting up stamina for player dash
@@ -77,50 +67,6 @@ function update() {
 
     WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT);
 
-    if(bulletxc <= 127){
-        projectileShoot.play()
-    }
-
-    /**/ //Bullet bounds check
-    if (bulletxc < (WIDTH + 40)){
-        /**/ //Bullet moving if it is in frame
-        if (bulletVelocity < bulletSpeed) {
-            bulletVelocity++;
-        }
-        /**/
-    } else {
-        if(canShoot == true){     
-            bulletxc = 120; //Setting start position
-            canShoot = false;
-            shootTimeModifier = 5;
-            setInterval(updateShootMethod,5000);
-        } else{
-            //Do nothing
-        }
-    }
-    /**/
-
-    /**/ //Applies friction and move the character
-    bulletVelocity *= bulletFriction;
-    bulletxc += bulletVelocity;
-    /**/
-
-    /**/ //Drawing and setting collision hitbox for projectile
-    bulletImg = document.getElementById('bullet');
-    bullet = createImage(bulletImg, bulletxc, bulletyc, bulletWidth, bulletHeight);
-    var bulletx = bulletxc + (bulletWidth - 32);
-    var bullety = bulletyc + bulletHeight;
-    var combineX = x + characterWidth;
-    var combineY = y + characterHeight;
-    if((bulletyc<=combineY && y<=bullety) && (x<=bulletx && combineX>=bulletxc)){
-        // Collission with projectile detected run code
-        bulletxc = 2000;
-        updateText();
-        charHealthPoints += -1;
-        projectileHit.play();
-    }
-    /**/
-
     /**/ //Set the inventory
     inventoryImg = document.getElementById('inventory');
     invImg = document.getElementById('invLogo');
@@ -142,23 +88,6 @@ function update() {
 function increaseI(){
     i += 1;
 }
-/**/
-
-/**/ //Shoot modifier for the boss
-function updateShootMethod(){
-    if (shootTimeModifier >= 5)
-    {
-        shootTimeModifier = 0;
-        canShoot = false;
-    }
-    else if (shootTimeModifier == 0)
-    {
-        shootTimeModifier = 5;
-        canShoot = true;
-    }
-}
-/**/
-
 /**/ //Updates the letter array and puts correct letter in correct spot
 function writeText(){
     letter[i] = text[i];

@@ -13,7 +13,7 @@ var x = 320,  //Starting x for the character
     keys = []; //What key is pressed
 
 /**/ //Movement function
-function WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
+function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
 
     /**/ //Checking if the keys are pressed down and changes velocity accordingly
     if /*W & uparrow*/ (keys[87] || keys[38]) {

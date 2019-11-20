@@ -200,8 +200,9 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
 function update() {
     requestAnimationFrame(update); //Updates canvas every frame
 
-    WalkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT); //Updates walking animaiton and scripts
+    walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT); //Updates walking animaiton and scripts
 
+    bulletScript();
 
     /**/ //Set the inventory
     inventoryImg = document.getElementById('inventory');
@@ -213,7 +214,7 @@ function update() {
         //Do nothing
     }
     /**/
-    
+
     /**/ //Fading into scene on load
     window.onload = load();
     /**/
