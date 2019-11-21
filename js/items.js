@@ -13,10 +13,11 @@ function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, c
     /**/ //Drawing and setting collision hitbox for item
     itemImg = document.getElementById(items[id]);
     if (!swordPickedUp){
-        if (swordDropped){
+        if (!swordDropped){
             itemObj = createImage(itemImg, itemxc, itemyc, itemWidth, itemHeight);
-        } else if (!swordDropped){
-            itemObj = createImage(itemImg, xc + 100, yc, itemWidth, itemHeight);
+        } else if (swordDropped){
+            var dropPoint = xc + 100;
+            itemObj = createImage(itemImg, dropPoint, yc, itemWidth, itemHeight);
         }
     } else{
         itemWidth = 0;
@@ -30,7 +31,7 @@ function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, c
     var bothY = yc + charHeight;
     if((itemyc<=bothY && yc<=itemy) && (xc<=itemx && bothX>=itemxc)){
         // Collission with Item detected run code
-        pickedUp = true;
+        swordPickedUp = true;
         inventory.push(items[id]);
         console.log(inventory);
         swordDropped = false;

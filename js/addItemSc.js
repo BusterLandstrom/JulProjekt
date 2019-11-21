@@ -1,11 +1,11 @@
 var c = 0,
     b = 0,
     euqipxc = 163,
-    equipyc = 179 + 109,
+    equipyc = 170 + 109,
     removexc = 163 + 50,
     removeyc = 170 + 109,
     bW = 50,
-    bH = 22,
+    bH = 22;
 
 function addItemToInv(invOn){
     for(var c = 0; c < inventory.length; c++){

@@ -20,6 +20,7 @@ function css( element, property ) {
     return window.getComputedStyle( element, null ).getPropertyValue( property );
 };
 /**/
+
 var invOn = false, //Setting so that the inventory is not viewing all the time
     invButtonX = 900, //Inv button x coordinates
     invButtonY = 36, //Inv button y coordinates
@@ -256,6 +257,7 @@ function update() {
     staminaProgressBar = stamBar('noFill', 'fill');
     healthProgressBar = healthBar();
     /**/
+
     itemAdd(); //Spawns item in level
 }
 /**/
@@ -301,7 +303,6 @@ function updateText(){
 }
 /**/
 
-
 canvas.addEventListener("click", invClick, false); //Event listener so the inventory button click funtion works
 
 /**/ //Inventory click
@@ -321,11 +322,8 @@ function invClick(e){
 }
 /**/
 
-canvas.addEventListener("click", equipItem, false); //Equip item event listener
-canvas.addEventListener("click", removeItem, false); //Remove item event listener
-
 /**/ //Equip item function
-function equipItem(){
+function equipItem(e){
     var rect = canvas.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
@@ -335,8 +333,10 @@ function equipItem(){
         if (invOn){
             if (!swordEquipped){
                 swordEquipped = true;
+                alert("equipped");
             } else if (swordEquipped){
                 swordEquipped = false;
+                alert("unequipped");
             }
         } 
     }
@@ -344,7 +344,7 @@ function equipItem(){
 /**/
 
 /**/ //Remove item from inventory function
-function removeItem(){
+function removeItem(e){
     var rect = canvas.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
@@ -355,10 +355,14 @@ function removeItem(){
             inventory = []
             swordDropped = true;
             swordPickedUp = false;
+            alert("removed");
         }
     }
 }
 /**/
+
+canvas.addEventListener("click", equipItem, false); //Equip item event listener
+canvas.addEventListener("click", removeItem, false); //Remove item event listener
 
 update(); //Update function (always running and updating every frame)
 
