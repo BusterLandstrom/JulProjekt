@@ -70,6 +70,21 @@ ctx.fillStyle = 'white';
 ctx.fillText("© Copyright 2019", 510, 740);
 /**/
 
+/**/ //createText function for easy text creation
+createText = function(fillStyles, fonts, fontsize, text, x, y) {
+   ctx.font = fontsize + " " + fonts;
+   ctx.fillStyle = fillStyles;
+   ctx.fillText(text, x, y);
+};
+/**/
+
+/**/ //Title screen "Tutorial"
+createText('white', pfont, '40px', 'W,A,S,D = Walking', 510, 560);
+createText('white', pfont, '40px', 'Q = Sprint', 510, 600);
+createText('white', pfont, '40px', 'F = Hit', 510, 640);
+createText('white', pfont, '40px', 'E = Block', 510, 680);
+/**/
+
 canvas.addEventListener("click", onStartClickEvent, false); //Event listener so the start button click funtion works
 
 /**/ //Start button click function
