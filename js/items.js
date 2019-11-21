@@ -6,6 +6,8 @@ var inventory = [],
     ],
     swordPickedUp = false,
     swordDropped = false,
+    swordEquipped = false,
+    dropVal = 0,
     itemId = [];
 
 
@@ -15,8 +17,12 @@ function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, c
     if (!swordPickedUp){
         if (!swordDropped){
             itemObj = createImage(itemImg, itemxc, itemyc, itemWidth, itemHeight);
+            dropVal = 0;
         } else if (swordDropped){
-            var dropPoint = xc + 100;
+            for(;dropVal == 1;){
+                var dropPoint = xc + 100;
+                dropVal += 1;
+            }
             itemObj = createImage(itemImg, dropPoint, yc, itemWidth, itemHeight);
         }
     } else{

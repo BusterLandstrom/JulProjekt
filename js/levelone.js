@@ -327,9 +327,9 @@ function equipItem(e){
     var rect = canvas.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    var eqInvX = equipyc + bW;
-    var eqInvY = euqipyc + bH;
-    if((x>=euqipxc && y>=equipyc) && (x<=eqInvX && y<=eqInvY)){
+    var eqInvX = equipxc + bW;
+    var eqInvY = equipyc + bH;
+    if((x>=equipxc && y>=equipyc) && (x<=eqInvX && y<=eqInvY)){
         if (invOn){
             if (!swordEquipped){
                 swordEquipped = true;

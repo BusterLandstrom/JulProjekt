@@ -1,6 +1,6 @@
 var c = 0,
     b = 0,
-    euqipxc = 163,
+    equipxc = 163,
     equipyc = 170 + 109,
     removexc = 163 + 50,
     removeyc = 170 + 109,
@@ -16,7 +16,7 @@ function addItemToInv(invOn){
                     equipImg = document.getElementById("equipButton");
                     removeImg = document.getElementById("removeButton");
                     createImage(swordImg, 163, 170, 100, 100);
-                    createImage(equipImg, euqipxc, equipyc, bW, bH);
+                    createImage(equipImg, equipxc, equipyc, bW, bH);
                     createImage(removeImg, removexc, removeyc, bW, bH);
                 } else if (!invOn){
                     //Do nothing

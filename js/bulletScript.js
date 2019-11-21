@@ -56,20 +56,21 @@ function bulletScript() {
     var combineY = y + characterHeight;
     if ((bulletyc <= combineY && y <= bullety) && (x <= bulletx && combineX >= bulletxc)) {
         // Collission with projectile detected run code
-        for (var v = 0; v < inventory.length; v++){
-            if(inventory[v] == "SwordofChristmas") {
-                if(keys[69]){
-                    if (swordEquipped){
-                        bulletSpeed = -6;
-                    } else {
-                        charHealthPoints += -25;
-                        bulletxc = 2000;
-                    }
+        if(inventory[0] == "SwordofChristmas") {
+            if(keys[69]){
+                if (swordEquipped){
+                    bulletSpeed = -6;
+                } else {
+                    charHealthPoints += -25;
+                    bulletxc = 2000;
                 }
             } else {
                 charHealthPoints += -25;
                 bulletxc = 2000;
             }
+        } else {
+            charHealthPoints += -25;
+            bulletxc = 2000;
         }
     }
     /**/
