@@ -1,17 +1,23 @@
 var inventory = [],
+    inventoryMax = 12,
     items = [
         "SwordofChristmas",
         "HealthPotion"
     ],
-    pickedUp = false,
+    swordPickedUp = false,
+    swordDropped = false,
     itemId = [];
 
 
 function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, charHeight){
     /**/ //Drawing and setting collision hitbox for item
     itemImg = document.getElementById(items[id]);
-    if (!pickedUp){
-        itemObj = createImage(itemImg, itemxc, itemyc, itemWidth, itemHeight);
+    if (!swordPickedUp){
+        if (swordDropped){
+            itemObj = createImage(itemImg, itemxc, itemyc, itemWidth, itemHeight);
+        } else if (!swordDropped){
+            itemObj = createImage(itemImg, xc + 100, yc, itemWidth, itemHeight);
+        }
     } else{
         itemWidth = 0;
         itemHeight = 0;
@@ -27,6 +33,7 @@ function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, c
         pickedUp = true;
         inventory.push(items[id]);
         console.log(inventory);
+        swordDropped = false;
     }
     /**/
 }

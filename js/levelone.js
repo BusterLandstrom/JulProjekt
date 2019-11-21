@@ -214,6 +214,8 @@ function update() {
         //Do nothing
     }
     /**/
+    
+    addItemToInv(invOn);
 
     /**/ //Fading into scene on load
     window.onload = load();
@@ -314,6 +316,45 @@ function invClick(e){
             invOn = true;
         } else if (invOn){
             invOn = false;
+        }
+    }
+}
+/**/
+
+canvas.addEventListener("click", equipItem, false); //Equip item event listener
+canvas.addEventListener("click", removeItem, false); //Remove item event listener
+
+/**/ //Equip item function
+function equipItem(){
+    var rect = canvas.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    var eqInvX = equipyc + bW;
+    var eqInvY = euqipyc + bH;
+    if((x>=euqipxc && y>=equipyc) && (x<=eqInvX && y<=eqInvY)){
+        if (invOn){
+            if (!swordEquipped){
+                swordEquipped = true;
+            } else if (swordEquipped){
+                swordEquipped = false;
+            }
+        } 
+    }
+}
+/**/
+
+/**/ //Remove item from inventory function
+function removeItem(){
+    var rect = canvas.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    var rmInvX = removexc + bW;
+    var rmInvY = removeyc + bH;
+    if((x>=removexc && y>=removeyc) && (x<=rmInvX && y<=rmInvY)){
+        if (invOn){
+            inventory = []
+            swordDropped = true;
+            swordPickedUp = false;
         }
     }
 }

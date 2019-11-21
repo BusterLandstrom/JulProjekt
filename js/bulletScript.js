@@ -59,10 +59,12 @@ function bulletScript() {
         for (var v = 0; v < inventory.length; v++){
             if(inventory[v] == "SwordofChristmas") {
                 if(keys[69]){
-                    bulletSpeed = -6;
-                } else {
-                    charHealthPoints += -25;
-                    bulletxc = 2000;
+                    if (swordEquipped){
+                        bulletSpeed = -6;
+                    } else {
+                        charHealthPoints += -25;
+                        bulletxc = 2000;
+                    }
                 }
             } else {
                 charHealthPoints += -25;
