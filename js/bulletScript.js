@@ -43,10 +43,12 @@ function bulletScript() {
         }
     }
     /**/
+
     /**/ //Applies friction and move the character
     bulletVelocity *= bulletFriction;
     bulletxc += bulletVelocity;
     /**/
+    
     /**/ //Drawing and setting collision hitbox for projectile
     bulletImg = document.getElementById('bullet');
     bullet = createImage(bulletImg, bulletxc, bulletyc, bulletWidth, bulletHeight);
@@ -75,6 +77,7 @@ function bulletScript() {
     }
     /**/
 }
+
     /**/ //Shoot modifier for the boss
     function updateShootMethod() {
         if (shootTimeModifier >= 5) {

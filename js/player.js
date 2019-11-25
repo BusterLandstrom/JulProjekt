@@ -8,6 +8,7 @@ var x = 320,  //Starting x for the character
     staminaW = 200, //StaminaBar width also used for health bar
     staminaH = 20, //StaminaBar height also used for health bar
     maxCharHealthPoints = 100, //Max hp for character
+    //manaValue = 20, //Mana value
     running = false, //If character is running or not
     canSprint = true, //Setting the sprinting varuable so you can only sprint when you have more than 0 stamina
     keys = []; //What key is pressed
@@ -168,6 +169,16 @@ healthBar = function (){
     healthPointText = createText("black", pfont, "17px", "Health: " + charHealthPoints + "/" + maxCharHealthPoints, 32, 52);
 }
 /**/
+
+/* //Mana bar
+manaBar = function (){
+    manabar = document.getElementById('noFill');
+    barimgMana = document.getElementById('manaFill');
+    barNoHP = createImage(manabar, 26, 36, staminaW, staminaH)
+    barFillHP = createImage(barimgHP, 26, 36, manaValue * 2, staminaH);
+    healthPointText = createText("black", pfont, "17px", "Health: " + charHealthPoints + "/" + maxCharHealthPoints, 32, 52);
+}
+*/
 
 /**/ //Stamina can sprint function
 function onStamina(){
