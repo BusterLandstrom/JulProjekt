@@ -199,9 +199,16 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
 
 /**/ //Update function where movement is handeled
 function update() {
-    requestAnimationFrame(update); //Updates canvas every frame
+    requestAnimationFrame(update); //Runs update function every frame
 
-    walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT); //Updates walking animaiton and scripts
+    
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    lvlImg = document.getElementById('lvlbg');
+    let bgimglvl = createImage(lvlImg,0,0,WIDTH,HEIGHT);    
+
+    let walkingscript = walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
+
+    console.log(x,y); //Shows character position
 
     bulletScript();
 
@@ -259,6 +266,12 @@ function update() {
     /**/
 
     itemAdd(); //Spawns item in level
+
+    if ((x <= 538 && x >= 386) && y < 200) {
+        if(keys[70]){
+            console.log('interacted with door');
+        }
+    }
 }
 /**/
 
@@ -365,6 +378,15 @@ canvas.addEventListener("click", equipItem, false); //Equip item event listener
 canvas.addEventListener("click", removeItem, false); //Remove item event listener
 
 update(); //Update function (always running and updating every frame)
+
+/**/ //Key down and up event listeners so the button activates on down press and deactivates on up release
+document.body.addEventListener("keydown", function (e) {
+    keys[e.keyCode] = true;
+});
+document.body.addEventListener("keyup", function (e) {
+    keys[e.keyCode] = false;
+});
+/**/
 
 /**/ //Appending canvas to main
 let main = document.getElementsByTagName('main')[0];

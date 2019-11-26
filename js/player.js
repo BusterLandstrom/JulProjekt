@@ -14,7 +14,7 @@ var x = 320,  //Starting x for the character
     keys = []; //What key is pressed
 
 /**/ //Movement function
-function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
+function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,boundsymin) {
 
     /**/ //Checking if the keys are pressed down and changes velocity accordingly
     if /*W & uparrow*/ (keys[87] || keys[38]) {
@@ -44,18 +44,18 @@ function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
     /**/
     
     /**/ // Checking for bounds On the x axis
-    if (x >= (WIDTH - 78)) {
-        x = (WIDTH - 78);
-    } else if (x <= 3) {
-        x = 3;
+    if (x >= boundsx) {
+        x = boundsx;
+    } else if (x <= boundsxmin) {
+        x = boundsxmin;
     }
     /**/
 
     /**/ // Checking for bounds On the y axis
-    if (y > (HEIGHT - 120)) {
-        y = (HEIGHT - 120);
-    } else if (y <= 3) {
-        y = 3;
+    if (y > boundsy) {
+        y = boundsy;
+    } else if (y <= boundsymin) {
+        y = boundsymin;
     }
     /**/
 
@@ -68,7 +68,7 @@ function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
     /**/
 
     /**/ //Dashing mechanic
-    if /*W & uparrow*/ ((keys[87] || keys[38]) && keys[81]) {
+    if /*W & uparrow*/ ((keys[87] || keys[38]) && keys[16]) {
         if (canSprint == true) {
             if (velY > -(speed)) {
                 speed = 10;
@@ -77,7 +77,7 @@ function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
             }
         }
     }
-    if /*S & downarrow*/ ((keys[83] || keys[40]) && keys[81]) {
+    if /*S & downarrow*/ ((keys[83] || keys[40]) && keys[16]) {
         if (canSprint == true) {
             if (velY < speed) {
                 speed = 10;
@@ -86,7 +86,7 @@ function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
             }
         }
     }
-    if /*D & rightarrow*/ ((keys[68] || keys[39]) && keys[81]) {
+    if /*D & rightarrow*/ ((keys[68] || keys[39]) && keys[16]) {
         if (canSprint == true) {
             if (velX < speed) {
                 speed = 10;
@@ -95,7 +95,7 @@ function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
             }
         }
     }
-    if /*A & leftarrow*/ ((keys[65] || keys[37]) && keys[81]) {
+    if /*A & leftarrow*/ ((keys[65] || keys[37]) && keys[16]) {
         if (canSprint == true) {
             if (velX > -speed) {
                 speed = 10;
@@ -136,7 +136,6 @@ function walkingScript(keys,velX,velY,speed,friction,WIDTH,HEIGHT) {
     /**/
 
     /**/ //Drawing the placeholder character
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
     character = createImage(characterImg, x, y, characterWidth, characterHeight);
     /**/
 

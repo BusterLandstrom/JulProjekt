@@ -80,8 +80,8 @@ createText = function(fillStyles, fonts, fontsize, text, x, y) {
 
 /**/ //Title screen "Tutorial"
 createText('white', pfont, '40px', 'W,A,S,D = Walking', 510, 560);
-createText('white', pfont, '40px', 'Q = Sprint', 510, 600);
-createText('white', pfont, '40px', 'F = Hit', 510, 640);
+createText('white', pfont, '40px', 'LShift = Sprint', 510, 600);
+createText('white', pfont, '40px', 'F = Hit/Use', 510, 640);
 createText('white', pfont, '40px', 'E = Block', 510, 680);
 /**/
 
