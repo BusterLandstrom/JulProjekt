@@ -8,10 +8,12 @@ var inventory = [],
     swordDropped = false,
     swordEquipped = false,
     dropVal = 0,
+    itemxc = 240, 
+    itemyc = 240, 
     itemId = [];
 
 
-function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, charHeight){
+function addSword(id, itemWidth, itemHeight, xc, yc, charWidth, charHeight){
     /**/ //Drawing and setting collision hitbox for item
     itemImg = document.getElementById(items[id]);
     if (!swordPickedUp){
@@ -19,11 +21,13 @@ function addItem(id, itemxc, itemyc, itemWidth, itemHeight, xc, yc, charWidth, c
             itemObj = createImage(itemImg, itemxc, itemyc, itemWidth, itemHeight);
             dropVal = 0;
         } else if (swordDropped){
-            for(;dropVal == 1;){
-                var dropPoint = xc + 100;
-                dropVal += 1;
+            if (dropVal < 1){
+                itemxc = x + 130;
+                itemyc = y;
+                dropVal = 1;
             }
-            itemObj = createImage(itemImg, dropPoint, yc, itemWidth, itemHeight);
+            swordEquipped = false;
+            itemObj = createImage(itemImg, itemxc, itemyc, itemWidth, itemHeight);
         }
     } else{
         itemWidth = 0;

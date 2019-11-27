@@ -47,7 +47,7 @@ function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,
     if (x >= boundsx) {
         x = boundsx;
     } else if (x <= boundsxmin) {
-        x = boundsxmin;
+        x = boundsxmin ;
     }
     /**/
 
@@ -186,5 +186,5 @@ function onStamina(){
 /**/
 
 function itemAdd(){
-    addItem(0, 240, 240, 70, 70, x, y, characterWidth, characterHeight); //Adding item to level
+    addSword(0, 70, 70, x, y, characterWidth, characterHeight); //Adding item to level
 }

@@ -10,8 +10,8 @@ canvas.height = HEIGHT;
 /**/
 
 /**/ //Create image function for easier image creation and nameing
-createImage = function(img, x, y, dheight, dwidth){
-    ctx.drawImage(img, x, y, dheight, dwidth);
+createImage = function(img, x, y, iheight, iwidth){
+    ctx.drawImage(img, x, y, iheight, iwidth);
 };
 /**/
 
@@ -204,13 +204,11 @@ function update() {
     
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     lvlImg = document.getElementById('lvlbg');
-    let bgimglvl = createImage(lvlImg,0,0,WIDTH,HEIGHT);    
+    bgimglvl = createImage(lvlImg,0,0,WIDTH,HEIGHT);    
 
-    let walkingscript = walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
+    walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
 
-    console.log(x,y); //Shows character position
-
-    bulletScript();
+    bulletScript(HEIGHT);
 
     /**/ //Set the inventory
     inventoryImg = document.getElementById('inventory');
@@ -243,12 +241,12 @@ function update() {
 
     /**/ //Starting dialogue initial
     if(fadingDisVal > 0){
-        startDialogue = createText('black', pfont, "20px", letter.join(""), 40, 640);
+        startDialogue = createText('white', pfont, "20px", letter.join(""), 40, 640);
     } else if ((fadingDisVal > -10) && (fadingDisVal < 0)){
-        secondDialogue = createText('black', pfont, "20px", letter2.slice(0,18).join(""), 40, 640);
-        secondDialogue2 = createText('black', pfont, "20px", letter2.slice(18,62).join(""), 40, 670);
+        secondDialogue = createText('white', pfont, "20px", letter2.slice(0,18).join(""), 40, 640);
+        secondDialogue2 = createText('white', pfont, "20px", letter2.slice(18,62).join(""), 40, 670);
     } else if ((fadingDisVal < -10) && (fadingDisVal > -20)){
-        secondDialogue = createText('black', pfont, "20px", letter3.join(""), 40, 640);
+        secondDialogue = createText('white', pfont, "20px", letter3.join(""), 40, 640);
     }
     /**/
 
