@@ -209,17 +209,6 @@ function update() {
     walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
 
     bulletScript(HEIGHT);
-
-    /**/ //Set the inventory
-    inventoryImg = document.getElementById('inventory');
-    invImg = document.getElementById('invLogo');
-    invLogo = createImage(invImg, invButtonX, invButtonY, invButtonW, invButtonH);
-    if(invOn){
-        inventoryObj = createImage(inventoryImg, 150, 130, 740, 540);
-    } else if (!invOn){
-        //Do nothing
-    }
-    /**/
     
     addItemToInv(invOn);
 
@@ -270,6 +259,17 @@ function update() {
             console.log('interacted with door');
         }
     }
+
+    /**/ //Set the inventory
+    inventoryImg = document.getElementById('inventory');
+    invImg = document.getElementById('invLogo');
+    invLogo = createImage(invImg, invButtonX, invButtonY, invButtonW, invButtonH);
+    if(invOn){
+        inventoryObj = createImage(inventoryImg, 150, 130, 740, 540);
+    } else if (!invOn){
+        //Do nothing
+    }
+    /**/
 }
 /**/
 
