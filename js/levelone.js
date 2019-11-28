@@ -195,7 +195,11 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
     velX = 0, //Velocity on the x axis for the character
     speed = 8, //Max speed fo the character
     friction = 2, //Friction for the character
-    keys = []; //What key is pressed
+    keys = [], //What key is pressed
+    bedx  = 230,
+    bedy = 589,
+    bedw = 200,
+    bedh = 66;
 
 /**/ //Update function where movement is handeled
 function update() {
@@ -211,6 +215,23 @@ function update() {
     bulletScript(HEIGHT);
     
     addItemToInv(invOn);
+    
+    emptyImg = document.getElementById("empty");
+
+    if (x > 230 && x < 355 && y > 228 && y < 470){
+        x = x + 3;
+        if(y > 228 && y < 300){
+            y = y - 3;
+        } else if(y < 470 && y > 310){
+            y = y + 3;
+        }
+    }
+        
+    console.log(x,y);
+    if (x > 230 && x < 409 && y > 472 && y < 580){
+        x = x + 3;
+        y = y - 3;
+    }
 
     /**/ //Fading into scene on load
     window.onload = load();
