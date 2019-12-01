@@ -219,7 +219,9 @@ function update() {
     emptyImg = document.getElementById("empty");
 
     if (x > 230 && x < 355 && y > 228 && y < 470){
-        x = x + 3;
+        if (x > 230 && x < 355){
+            x = x + 3;
+        }
         if(y > 228 && y < 300){
             y = y - 3;
         } else if(y < 470 && y > 310){
