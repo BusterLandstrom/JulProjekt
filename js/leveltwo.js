@@ -31,9 +31,9 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
     fadingDisVal = 10, //Fading value for text to disappear after it has appeared
     i = -1, //I variable for text writing
     /**/ //Text for  talking
-    story1 = "hejsan",
-    story2 = "hallåsan",
-    story21 = "huh?",
+    story1 = "How did i get here?",
+    story2 = "bruh",
+    story21 = "birh",
     story3 = "duuude",
     /**/
     p = document.getElementById('ptext'), //Getting p element so i can use its font
@@ -58,30 +58,9 @@ function update() {
     lvlImg = document.getElementById('lvlbg');
     bgimglvl = createImage(lvlImg,0,0,WIDTH,HEIGHT);    
 
-    walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
-
-    bulletScript(HEIGHT);
+    walkingScript(keys,velX,velY,speed,friction,1024-characterWidth+18,-18,768-characterHeight,0); //Updates walking animaiton and scripts
     
     addItemToInv(invOn);
-    
-    emptyImg = document.getElementById("empty");
-
-    if (x > 230 && x < 355 && y > 228 && y < 470){
-        if (x > 230 && x < 355){
-            x = x + 3;
-        }
-        if(y > 228 && y < 300){
-            y = y - 3;
-        } else if(y < 470 && y > 310){
-            y = y + 3;
-        }
-    }
-        
-    console.log(x,y);
-    if (x > 230 && x < 409 && y > 472 && y < 580){
-        x = x + 3;
-        y = y - 3;
-    }
 
     /**/ //Fading into scene on load
     window.onload = load();
@@ -121,14 +100,6 @@ function update() {
     staminaProgressBar = stamBar('noFill', 'fill');
     healthProgressBar = healthBar();
     /**/
-
-    itemAdd(); //Spawns item in level
-
-    if ((x <= 538 && x >= 386) && y < 200) {
-        if(keys[70]){
-            window.open('leveltwo.html','_self');
-        }
-    }
 
     /**/ //Set the inventory
     inventoryImg = document.getElementById('inventory');

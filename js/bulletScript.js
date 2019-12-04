@@ -132,6 +132,7 @@ function bulletScript(HEIGHT) {
     var combineEy = enemyy + enemyH;
     /**/
 
+    /**/ //Bullet collision with player
     if ((bulletyc <= combineY && y <= bullety) && (x <= bulletx && combineX >= bulletxc)) {
         /**/ // Collission with projectile detected run code and check if character has sword equipped or nots (Changes will need to me made soon)
         if(inventory[0] == "SwordofChristmas") {
@@ -152,7 +153,9 @@ function bulletScript(HEIGHT) {
         }
         /**/
     }
+    /**/
 
+    /**/ //Bullet collision with enemy
     if ((bulletyc <= combineEy && enemyy <= bullety) && (enemyx <= bulletx && combineEx >= bulletxc)) {
         /**/ //Checking if the bullt has been shot to the enemy and gets hit if deflection has been done
         if(bulletSpeed == -6) {
