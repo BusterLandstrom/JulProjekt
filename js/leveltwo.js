@@ -43,11 +43,7 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
     velX = 0, //Velocity on the x axis for the character
     speed = 8, //Max speed fo the character
     friction = 2, //Friction for the character
-    keys = [], //What key is pressed
-    bedx  = 230,
-    bedy = 589,
-    bedw = 200,
-    bedh = 66;
+    keys = []; //What key is pressed
 
 /**/ //Update function where movement is handeled
 function update() {
