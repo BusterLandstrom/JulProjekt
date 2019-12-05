@@ -43,7 +43,7 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
     velX = 0, //Velocity on the x axis for the character
     speed = 8, //Max speed fo the character
     friction = 2, //Friction for the character
-    keys = []; //What key is pressed
+    keys = []; //Gets what the keycode for the key that is pressed down
 
 /**/ //Update function where movement is handeled
 function update() {
@@ -110,9 +110,11 @@ function update() {
 }
 /**/
 
+/**/ //Fade screeen
 function changeFadeVal(){
     fadingVal = -3;
 }
+/**/
 
 /**/ //Loads the loading box
 function load(){

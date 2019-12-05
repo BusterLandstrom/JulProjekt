@@ -68,19 +68,19 @@ function update() {
 
     if (x > 230 && x < 355 && y > 228 && y < 470){
         if (x > 230 && x < 355){
-            x = x + 3;
+            x = x + speed;
         }
         if(y > 228 && y < 300){
-            y = y - 3;
+            y = y - speed;
         } else if(y < 470 && y > 310){
-            y = y + 3;
+            y = y + speed;
         }
     }
         
     console.log(x,y);
     if (x > 230 && x < 409 && y > 472 && y < 580){
-        x = x + 3;
-        y = y - 3;
+        x = x + speed;
+        y = y - speed;
     }
 
     /**/ //Fading into scene on load
