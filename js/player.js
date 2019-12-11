@@ -1,16 +1,18 @@
 var x = 320,  //Starting x for the character
     y = 450,  //Starting y for the character 
-    characterWidth = 100, //Width of the main character
-    characterHeight = 120, //Height of the character
+    characterWidth = 32*2, //Width of the main character
+    characterHeight = 64*2, //Height of the character
     charHealthPoints = 100, //Character hp
     stamina = 20, //Setting up stamina for player dash
     staminaMax = 20, //Setting up stamina for player dash
     staminaW = 200, //StaminaBar width also used for health bar
     staminaH = 20, //StaminaBar height also used for health bar
     maxCharHealthPoints = 100, //Max hp for character
+    characterImg = document.getElementById("down"),
     //manaValue = 20, //Mana value
     running = false, //If character is running or not
     canSprint = true, //Setting the sprinting varuable so you can only sprint when you have more than 0 stamina
+    direction = " ",
     keys = []; //What key is pressed
 
 /**/ //Movement function
@@ -19,24 +21,28 @@ function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,
     /**/ //Checking if the keys are pressed down and changes velocity accordingly
     if /*W & uparrow*/ (keys[87] || keys[38]) {
         if (velY > -speed) {
+            direction = "up";
             velY--;
             running = false;
         }
     }
     if /*S & downarrow*/ (keys[83] || keys[40]) {
         if (velY < speed) {
+            direction = "down";
             velY++;
             running = false;
         }
     }
     if /*D & rightarrow*/ (keys[68] || keys[39]) {
         if (velX < speed) {
+            direction = "right";
             velX++;
             running = false;
         }
     }
     if /*A & leftarrow*/ (keys[65] || keys[37]) {
         if (velX > -speed) {
+            direction = "left";
             velX--;
             running = false;
         }
@@ -44,7 +50,7 @@ function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,
     /**/
     
     /**/ // Checking for bounds On the x axis
-    if (x >= boundsx) {
+    if (x >= boundsx +20) {
         x = boundsx;
     } else if (x <= boundsxmin) {
         x = boundsxmin ;
@@ -136,6 +142,19 @@ function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,
     /**/
 
     /**/ //Drawing the placeholder character
+    if (direction == "up"){
+        characterImg = document.getElementById("up");
+
+    }else if (direction == "down" || direction == " "){
+        characterImg = document.getElementById("down");
+
+    } else if (direction == "right"){
+        characterImg = document.getElementById("right");
+
+    } else if (direction == "left"){
+        characterImg = document.getElementById("left");
+
+    }
     character = createImage(characterImg, x, y, characterWidth, characterHeight);
     /**/
 

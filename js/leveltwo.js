@@ -38,7 +38,6 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
     /**/
     p = document.getElementById('ptext'), //Getting p element so i can use its font
     pfont = css( p, 'font-family' ), //Setting text font from css
-    characterImg = document.getElementById('character'), //Getting the character sprite
     velY = 0, //velocity on the y axis for the character
     velX = 0, //Velocity on the x axis for the character
     speed = 8, //Max speed fo the character

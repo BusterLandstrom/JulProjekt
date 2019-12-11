@@ -5,7 +5,9 @@ var c = 0,
     removexc = 163 + 50,
     removeyc = 170 + 109,
     bW = 50,
-    bH = 22;
+    bH = 22,
+    swordH = 100,
+    swordW = 100;
 
 function addItemToInv(invOn){
     for(var c = 0; c < inventory.length; c++){
@@ -15,7 +17,7 @@ function addItemToInv(invOn){
                     swordImg = document.getElementById("SwordofChristmas");
                     equipImg = document.getElementById("equipButton");
                     removeImg = document.getElementById("removeButton");
-                    createImage(swordImg, 163, 170, 100, 100);
+                    createImage(swordImg, 163, 170, swordW, swordH);
                     createImage(equipImg, equipxc, equipyc, bW, bH);
                     createImage(removeImg, removexc, removeyc, bW, bH);
                 } else if (!invOn){

@@ -38,7 +38,6 @@ var invOn = false, //Setting so that the inventory is not viewing all the time
     /**/
     p = document.getElementById('ptext'), //Getting p element so i can use its font
     pfont = css( p, 'font-family' ), //Setting text font from css
-    characterImg = document.getElementById('character'), //Getting the character sprite
     velY = 0, //velocity on the y axis for the character
     velX = 0, //Velocity on the x axis for the character
     speed = 8, //Max speed fo the character
@@ -65,23 +64,25 @@ function update() {
     addItemToInv(invOn);
     
     emptyImg = document.getElementById("empty");
-
-    if (x > 230 && x < 355 && y > 228 && y < 470){
-        if (x > 230 && x < 355){
-            x = x + speed;
+    
+    if (x > 590 && x < 720 && y > 338 && y < 478){
+        if (x > 590 && x < 720){
+            x = x - speed;
         }
-        if(y > 228 && y < 300){
+        if(y > 338 && y < 400){
             y = y - speed;
-        } else if(y < 470 && y > 310){
+        } else if(y < 478 && y > 400){
             y = y + speed;
         }
     }
         
     console.log(x,y);
-    if (x > 230 && x < 409 && y > 472 && y < 580){
+    /**/ //Checks for bed collision
+    if (x > 230 && x < 413 && y > 472 && y < 580){
         x = x + speed;
         y = y - speed;
     }
+    /**/
 
     /**/ //Fading into scene on load
     window.onload = load();
