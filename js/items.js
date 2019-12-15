@@ -10,7 +10,13 @@ var inventory = [],
     dropVal = 0,
     itemxc = 240, 
     itemyc = 240, 
-    itemId = [];
+    itemId = [],    
+    healthPotionPickedUp = false,
+    healthPotionDropped = false,
+    healthPotionUse = false,
+    healthPotionDropVal = 1,
+    healthPotionitemxc = 100, 
+    healthPotionitemyc = 100;
 
 
 function addSword(id, itemWidth, itemHeight, xc, yc, charWidth, charHeight){
@@ -47,4 +53,40 @@ function addSword(id, itemWidth, itemHeight, xc, yc, charWidth, charHeight){
         swordDropped = false;
     }
     /**/
+}
+
+function addhealthPotion(id, healthPotionitemWidth, healthPotionitemHeight, xc, yc, charWidth, charHeight){
+    healthPotionItemImg = document.getElementById(items[id]);
+    if (!healthPotion){
+        if (!healthPotionDropped){
+            itemObj = createImage(healthPotionItemImg, healthPotionitemxc, healthPotionitemyc, healthPotionitemWidth, healthPotionitemHeight);
+            DropVal = 1;
+        } else if (healthPotion){
+            if (healthPotionDropVal < 1){
+                healthPotionitemxc = x + 130;
+                healthPotionitemyc = y;
+                healthPotionDropVal = 1;
+            }
+            healthPotionUse = false;
+            itemObj = createImage(healthPotionItemImg, healthPotionitemxc, healthPotionitemyc, healthPotionitemWidth, healthPotionitemHeight);
+        }
+    } else{
+       healthPotionitemWidth = 0;
+        healthPotionitemHeight = 0;
+        healthPotionitemxc = 0;
+        healthPotionitemyc = 0;
+    }
+    var healthPotionitemx = healthPotionitemxc + healthPotionitemWidth;
+    var healthPotionitemy = healthPotionitemyc + healthPotionitemHeight;
+    var bothX = xc + charWidth;
+    var bothY = yc + charHeight;
+    if((healthPotionitemyc<=bothY && yc<=healthPotionitemy) && (xc<=healthPotionitemx && bothX>=healthPotionitemxc)){
+        // Collission with Item detected run code
+        healthPotionPickedUp = true;
+        inventory.push(items[id]);
+        console.log(inventory);
+        healthPotionDropped = false;
+    }
+    /**/
+
 }

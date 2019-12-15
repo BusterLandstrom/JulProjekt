@@ -1,6 +1,6 @@
 var x = 320,  //Starting x for the character
     y = 450,  //Starting y for the character 
-    characterWidth = 32*2, //Width of the main character
+    characterWidth = 64*2, //Width of the main character
     characterHeight = 64*2, //Height of the character
     charHealthPoints = 100, //Character hp
     stamina = 20, //Setting up stamina for player dash
@@ -205,5 +205,6 @@ function onStamina(){
 /**/
 
 function itemAdd(){
-    addSword(0, 70, 70, x, y, characterWidth, characterHeight); //Adding item to level
+    addSword(0, 70, 70, x, y, characterWidth, characterHeight); //Adding sword to level
+    addSword(1, 64, 64, x, y, characterWidth, characterHeight); //Adding healthPotion to level
 }

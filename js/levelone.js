@@ -59,7 +59,8 @@ function update() {
 
     walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
 
-    bulletScript(HEIGHT);
+    //bulletScript(HEIGHT);
+    grimBulletScript();
     
     addItemToInv(invOn);
     

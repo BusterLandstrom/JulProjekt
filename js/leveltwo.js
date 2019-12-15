@@ -51,7 +51,7 @@ function update() {
     
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     lvlImg = document.getElementById('lvlbg');
-    bgimglvl = createImage(lvlImg,0,0,WIDTH,HEIGHT);    
+    bgimglvl = createImage(lvlImg,0,0,2048,1536);    
 
     walkingScript(keys,velX,velY,speed,friction,1024-characterWidth+18,-18,768-characterHeight,0); //Updates walking animaiton and scripts
     

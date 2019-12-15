@@ -38,7 +38,7 @@ update();
 /**/ //Setting up for image and font drawing
 let p = document.getElementById('ptext');
 let pfont = css( p, 'font-family' );
-let bgimg = document.getElementById('backgroundimage');
+let bgimg = document.getElementById('lvlbg');
 let img = document.getElementById('startGame');
 let backgroundImg = createImage (bgimg, 0,0, WIDTH, HEIGHT);
 let startButton = createImage( img, startButtonX, startButtonY, startButtonWidth, startButtonHeight);
