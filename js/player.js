@@ -141,7 +141,7 @@ function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,
     x += velX;
     /**/
 
-    /**/ //Drawing the placeholder character
+    /* //Drawing the placeholder character
     if (direction == "up"){
         characterImg = document.getElementById("up");
 
@@ -155,8 +155,9 @@ function walkingScript(keys,velX,velY,speed,friction,boundsx,boundsxmin,boundsy,
         characterImg = document.getElementById("left");
 
     }
+    */
     character = createImage(characterImg, x, y, characterWidth, characterHeight);
-    /**/
+    
 
     /**/ //Key down and up event listeners so the button activates on down press and deactivates on up release
     document.body.addEventListener("keydown", function (e) {

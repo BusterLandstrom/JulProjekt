@@ -60,7 +60,7 @@ function update() {
     walkingScript(keys,velX,velY,speed,friction,694,233,547,177); //Updates walking animaiton and scripts
 
     //bulletScript(HEIGHT);
-    grimBulletScript();
+    //grimBulletScript();
     
     addItemToInv(invOn);
     
@@ -126,9 +126,9 @@ function update() {
 
     itemAdd(); //Spawns item in level
 
-    if ((x <= 538 && x >= 386) && y < 200) {
+    if ((x <= 660 && x >= 570) && (y >= 470 && y <= 510)) {
         if(keys[70]){
-            window.open('leveltwo.html','_self');
+            alert('read letter');
         }
     }
 

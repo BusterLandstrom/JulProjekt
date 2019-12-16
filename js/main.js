@@ -67,7 +67,7 @@ ctx.fillText("of Christmas", 512, 298);
 ctx.font = "20px " + pfont;
 ctx.textAlign = 'center';
 ctx.fillStyle = 'white'; 
-ctx.fillText("© Copyright 2019", 510, 740);
+ctx.fillText("© Copyright 2019      Beta v1,7", 492, 740);
 /**/
 
 /**/ //createText function for easy text creation
